@@ -1,0 +1,33 @@
+name: "Build and Run Test cases PR"
+on:
+  push:
+    branches:
+      - master
+      - main
+
+ workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Publish package to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v4
+      - name: "Configure '.npmrc'."
+        run: |
+          echo "@fattmerchantorg:registry=https://npm.pkg.github.com" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAX_BOT_TOKEN }}" >> ~/.npmrc
+      - name: Install dependencies
+        run: npm run publish
+
+      - name: Run tests
+      - run: npm run test
+
+      - name: Test complete
+        run: echo "Tests complete"
+      - name: Run Build
+        run: npm run build
+
+      - name: Build complete
+        run: echo "Build was successful"

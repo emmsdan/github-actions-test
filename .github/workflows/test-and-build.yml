@@ -22,16 +22,21 @@ jobs:
         run: |
           echo "@fattmerchantorg:registry=https://npm.pkg.github.com" > ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAX_BOT_TOKEN }}" >> ~/.npmrc
-      - name: Run a one-line script
-        run: echo Hello, world!
+          echo "@fortawesome:registry=https://npm.fontawesome.com/" >> ~/.npmrc
+          echo "//npm.fontawesome.com/:_authToken=${{ secrets.FONT_AWESOME_TOKEN }}" >> ~/.npmrc
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Install dependencies
+        run: npm install
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Run tests cases
+        run: npm run test
 
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Test cases ran successfully
+        run: echo Test cases ran successfully
+
+      - name: Build package
+        run: npm run build
+
+      - name: Build package successfully
+        run: echo Build package successfully
+

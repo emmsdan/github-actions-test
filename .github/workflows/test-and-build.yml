@@ -12,29 +12,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-app-test:
+  build-and-test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: volta-cli/action@v4
       - name: "Configure '.npmrc'."
         run: |
           echo "@fattmerchantorg:registry=https://npm.pkg.github.com" > ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAX_BOT_TOKEN }}" >> ~/.npmrc
-          echo "@fortawesome:registry=https://npm.fontawesome.com/" >> ~/.npmrc
-          echo "//npm.fontawesome.com/:_authToken=${{ secrets.FONT_AWESOME_TOKEN }}" >> ~/.npmrc
-          
-      - name: Install dependencies
-        run: npm install
+      - name: Run a one-line script
+        run: echo Hello, world!
 
-      - name: Run tests
-      - run: npm run test
+      - name: Run a one-line script
+        run: echo Hello, world!
 
-      - name: Test complete
-        run: echo "Tests complete"
+      - name: Run a one-line script
+        run: echo Hello, world!
 
-      - name: Run Build
-        run: npm run build
-
-      - name: Build complete
-        run: echo "Build was successful"
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.

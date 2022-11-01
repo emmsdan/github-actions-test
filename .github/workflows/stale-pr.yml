@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/stale@v5
         with:
-          repo-token: ${{ secrets.STAX_BOT_TOKEN }}
+          repo-token: ${{ secrets.ACTION_TOKEN }}
           stale-pr-message: 'No activity on this PR for 30 days. This PR will be closed in 60 days, if no activity (ie comment, issue, commit etc) occurs.'
           stale-pr-label: 'stale'
           days-before-stale: 30

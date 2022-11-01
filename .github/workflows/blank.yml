@@ -1,0 +1,25 @@
+name: "Automatic Package Publishing"
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  publish-package:
+    name: Publish package to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com
+          scope: "@fattmerchantorg"
+
+      - name: Update package version
+        run: npm version --new-version "${GITHUB_REF:11}" --no-git-tag-version
+      - name: Publish package to internal registry on GitHub
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

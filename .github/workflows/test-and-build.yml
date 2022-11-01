@@ -12,8 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-test:
-    name: Publish package to NPM
+  run-app-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,14 +21,18 @@ jobs:
         run: |
           echo "@fattmerchantorg:registry=https://npm.pkg.github.com" > ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAX_BOT_TOKEN }}" >> ~/.npmrc
+          echo "@fortawesome:registry=https://npm.fontawesome.com/" >> ~/.npmrc
+          echo "//npm.fontawesome.com/:_authToken=${{ secrets.FONT_AWESOME_TOKEN }}" >> ~/.npmrc
+          
       - name: Install dependencies
-        run: npm run publish
+        run: npm install
 
       - name: Run tests
       - run: npm run test
 
       - name: Test complete
         run: echo "Tests complete"
+
       - name: Run Build
         run: npm run build
 

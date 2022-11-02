@@ -31,7 +31,3 @@ jobs:
               # npm version --new-version "$GITHUB_REF:11"
               npm install
               npm run prepare
-      - name: Publish package to internal registry on GitHub
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.ACTION_TOKEN }}

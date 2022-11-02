@@ -23,7 +23,10 @@ jobs:
 
       - name: Update package version
         run: |
+              cat /home/runner/work/_temp/.npmrc >> .npmrc
               cat /home/runner/work/_temp/.npmrc >> ~/.npmrc
+              ls .npmrc
+              ls ~/.npmr
               npm show @emmsdan/github-actions-test version
               npm version patch
               echo "${{ github.ref }}"

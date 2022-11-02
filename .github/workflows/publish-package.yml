@@ -24,7 +24,7 @@ jobs:
       - name: Update package version
         run: |
               echo "@emmsdan:registry=https://npm.pkg.github.com" > .npmrc
-              echo "//npm.pkg.github.com/:_authToken=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" >> .npmrc
+              echo "//npm.pkg.github.com/:_authToken=${{ secrets.ACTION_TOKEN }}" >> .npmrc
               # npm version --new-version "$GITHUB_REF:11"
               npm set registry https://npm.pkg.github.com
               npm install @emmsdan/github-actions-test
@@ -38,4 +38,4 @@ jobs:
       - name: Publish package to internal registry on GitHub
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: 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
+          NODE_AUTH_TOKEN: ${{ secrets.ACTION_TOKEN }}

@@ -23,10 +23,10 @@ jobs:
 
       - name: Update package version
         run: |
-              echo "@emmsdan:registry=https://npm.pkg.github.com" > ~/.npmrc
-              echo "//npm.pkg.github.com/:_authToken=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" >> ~/.npmrc
+              echo "@emmsdan:registry=https://npm.pkg.github.com" > .npmrc
+              echo "//npm.pkg.github.com/:_authToken=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" >> .npmrc
               # npm version --new-version "$GITHUB_REF:11"
-               npm set registry https://npm.pkg.github.com
+              npm set registry https://npm.pkg.github.com
               npm install @emmsdan/github-actions-test
               npm run prepare
       - name: Get npm versions

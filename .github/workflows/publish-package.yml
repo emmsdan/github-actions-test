@@ -21,7 +21,6 @@ jobs:
         run: |
               echo "0.0.12 - test"
               echo "${{ github.ref }}"
-              echo "${{ github.ref:11 }}"
               npm version --new-version "${GITHUB_REF:11}" --no-git-tag-version
       - name: Publish package to internal registry on GitHub
         run: npm publish

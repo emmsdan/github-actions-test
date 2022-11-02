@@ -21,7 +21,7 @@ jobs:
         if: env.GIT_DIFF
       - uses: volta-cli/action@v4
 
-      - name: Update package version
+      - name: Setup npmrc and git config
         run: |
               echo "@emmsdan:registry=https://npm.pkg.github.com" > .npmrc
               echo "//npm.pkg.github.com/:_authToken=${{ secrets.ACTION_TOKEN }}" >> .npmrc
@@ -29,10 +29,17 @@ jobs:
               echo "About to echo"
               git config --global user.email "emmsdan.inc@gmail.com"
               git config --global user.name "Stax Bot"
+
+      - name: Update/increment package version
+        run: |
               version_id=$(npm show @emmsdan/github-actions-test version) 
               npm version $version_id
               npm version patch
-              echo "${{ github.ref }}"
+
+      - name: Install dependecies
+        run: |
+              npm install
+              npm run prepare
       - name: Publish package to internal registry on GitHub
         run: npm publish
         env:

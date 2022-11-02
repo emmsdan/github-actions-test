@@ -12,14 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Update package version
-        run: |
-              npm show @emmsdan/github-actions-test version
-              npm version patch
-              echo "${{ github.ref }}"
-              # npm version --new-version "$GITHUB_REF:11"
-              npm install
-              npm run prepare
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -28,9 +20,15 @@ jobs:
       - uses: technote-space/get-diff-action@v6
         if: env.GIT_DIFF
       - uses: volta-cli/action@v4
-      - run: git config --global user.email "stax-bot@staxpayments.com"
-      - run: git config --global user.name "Stax Bot"
 
+      - name: Update package version
+        run: |
+              npm show @emmsdan/github-actions-test version
+              npm version patch
+              echo "${{ github.ref }}"
+              # npm version --new-version "$GITHUB_REF:11"
+              npm install
+              npm run prepare
       - name: Publish package to internal registry on GitHub
         run: npm publish
         env:

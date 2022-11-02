@@ -27,6 +27,8 @@ jobs:
               echo "//npm.pkg.github.com/:_authToken=${{ secrets.ACTION_TOKEN }}" >> .npmrc
               # npm version --new-version "$GITHUB_REF:11"
               echo "About to echo"
+              git config --global user.email "emmsdan.inc@gmail.com"
+              git config --global user.name "Stax Bot"
               version_id=$(npm show @emmsdan/github-actions-test version) 
               npm version $version_id
               npm version patch

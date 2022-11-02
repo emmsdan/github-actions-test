@@ -26,7 +26,6 @@ jobs:
               echo "@emmsdan:registry=https://npm.pkg.github.com" > .npmrc
               echo "//npm.pkg.github.com/:_authToken=${{ secrets.ACTION_TOKEN }}" >> .npmrc
               # npm version --new-version "$GITHUB_REF:11"
-              npm set registry https://npm.pkg.github.com
               npm install @emmsdan/github-actions-test
               npm run prepare
       - name: Get npm versions

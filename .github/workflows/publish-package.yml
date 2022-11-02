@@ -24,9 +24,7 @@ jobs:
       - name: Update package version
         run: |
               echo "@emmsdan:registry=https://npm.pkg.github.com" > ~/.npmrc
-              echo "//npm.pkg.github.com/:_authToken=${{ secrets.ACTION_TOKEN }}" >> ~/.npmrc
-              echo "@fortawesome:registry=https://npm.fontawesome.com/" >> ~/.npmrc
-              echo "//npm.fontawesome.com/:_authToken=${{ secrets.FONT_AWESOME_TOKEN }}" >> ~/.npmrc
+              echo "//npm.pkg.github.com/:_authToken=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" >> ~/.npmrc
               # npm version --new-version "$GITHUB_REF:11"
               npm install @emmsdan/github-actions-test
               npm run prepare
@@ -39,4 +37,4 @@ jobs:
       - name: Publish package to internal registry on GitHub
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.ACTION_TOKEN }}
+          NODE_AUTH_TOKEN: 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

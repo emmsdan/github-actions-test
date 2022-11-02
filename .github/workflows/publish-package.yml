@@ -31,7 +31,8 @@ jobs:
       - name: Get npm versions
         run: |
               echo "About to echo"
-              npm show @emmsdan/github-actions-test version
+              version_id=$(npm show @emmsdan/github-actions-test version) 
+              npm version $version_id
               npm version patch
               echo "${{ github.ref }}"
       - name: Publish package to internal registry on GitHub
